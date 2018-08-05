@@ -21,6 +21,8 @@
     "preinstall": "npm run npmcheckversion",
     "postinstall": "npm run build:dll",
     "prebuild": "npm run build:clean",
+    "migration:start": "knex --knexfile ./server/db/knexfile.js migrate:latest" ,
+    "migration:rollback": "knex --knexfile ./server/db/knexfile.js migrate:rollback",
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./build",
     "build:dll": "node ./internals/scripts/dependencies.js",
