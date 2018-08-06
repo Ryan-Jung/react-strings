@@ -1,13 +1,10 @@
-//Set up database connection
+// Set up database connection
 
-const db = require('knex')({
-    client = 'mysql',
-    connection: {
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE
-    }
-})
+const configSettings = require('./knexfile');
+const { development, production } = configSettings;
+
+const config = process.NODE_ENV === 'development' ? development : production;
+
+const db = require('knex')(config);
 
 module.exports = db;
