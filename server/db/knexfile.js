@@ -27,6 +27,15 @@ module.exports = {
     migrations: {
       directory: './migrations',
     },
+    pool: {
+      min: 2,
+      max: 10,
+      afterCreate: (connection, callback) => {
+        connection.query('SET time_zone = "UTC"', error => {
+          callback(error, connection);
+        });
+      },
+    },
   },
 
   production: {
@@ -38,6 +47,15 @@ module.exports = {
     },
     migrations: {
       directory: './migrations',
+    },
+    pool: {
+      min: 2,
+      max: 10,
+      afterCreate: (connection, callback) => {
+        connection.query('SET time_zone = "UTC"', error => {
+          callback(error, connection);
+        });
+      },
     },
   },
 };
