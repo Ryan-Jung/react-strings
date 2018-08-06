@@ -35,16 +35,8 @@ routes.get('/messages', (request, response) => {
       .replace(/T/, ' ')
       .replace(/\..*$/g, '');
 
-    /*  If CONVERT_TZ is returning null need to run
-            Need to run:
-                mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql
-
-        */
     db('messages')
-      .whereRaw(
-        "CONVERT_TZ(created_at, @@session.time_zone, '+00:00') >= CAST(? AS DATETIME)",
-        formattedDate,
-      )
+      .whereRaw('created_at >= ?', formattedDate)
       .select('message')
       .then(results => {
         response.json(results);
