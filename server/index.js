@@ -14,8 +14,22 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
+// Include body-parser to handle request bodies
+const bodyParser = require('body-parser');
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
+app.use(bodyParser.json());
+
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+const api = require('./api');
+for (let index = 0; index < api.length; index += 1) {
+  app.use('/api', api[index]);
+}
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
