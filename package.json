@@ -21,7 +21,7 @@
     "preinstall": "npm run npmcheckversion",
     "postinstall": "npm run build:dll",
     "prebuild": "npm run build:clean",
-    "migration:start": "knex --knexfile ./server/db/knexfile.js migrate:latest" ,
+    "migration:start": "knex --knexfile ./server/db/knexfile.js migrate:latest",
     "migration:rollback": "knex --knexfile ./server/db/knexfile.js migrate:rollback",
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./build",
@@ -147,6 +147,7 @@
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",
+    "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "compression": "1.7.2",
     "cross-env": "5.2.0",
